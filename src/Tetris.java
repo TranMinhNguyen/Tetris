@@ -11,6 +11,9 @@ import javax.swing.JMenuItem;
 
 public class Tetris extends JFrame{
 
+	int level;
+	int score;
+	private SidePanel sidepanel;
 	public Tetris(){
 		setSize(500, 600);
 		setTitle("Tetris");
@@ -21,7 +24,8 @@ public class Tetris extends JFrame{
 		setLocationRelativeTo(null);
 		
 		CreateMenu();
-		
+		this.sidepanel=new SidePanel(this);
+		add(sidepanel,BorderLayout.EAST);
 		setVisible(true);
 	}
 	
@@ -60,6 +64,15 @@ public class Tetris extends JFrame{
 	public static void main(String[] args) {
 		new Tetris(); 
 	
+	}
+
+	public int getLevel() {
+		
+		return level;
+	}
+
+	public int getScore() {
+		return score;
 	}
 
 }
