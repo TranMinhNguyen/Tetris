@@ -14,8 +14,11 @@ public class Tetris extends JFrame{
 	int level;
 	int score;
 	private SidePanel sidepanel;
+	private BoardPanel boardpanel;
+	
+	
 	public Tetris(){
-		setSize(500, 600);
+		//setSize(500, 600);
 		setTitle("Tetris");
 		setLayout(new BorderLayout());
 		setResizable(false);
@@ -25,7 +28,12 @@ public class Tetris extends JFrame{
 		
 		CreateMenu();
 		this.sidepanel=new SidePanel(this);
+		this.boardpanel=new BoardPanel(this);
+	
 		add(sidepanel,BorderLayout.EAST);
+		add(boardpanel,BorderLayout.CENTER);
+		
+		pack();
 		setVisible(true);
 	}
 	

@@ -25,7 +25,7 @@ private static final int SMALL_INSET = 20;
 	private static final Font LARGE_FONT = new Font("Tahoma", Font.BOLD, 13);
 	
 	 //Mau Sac De Ve Van Ban .
-	private static final Color DRAW_COLOR = new Color(128, 192, 128);
+	private static final Color DRAW_COLOR = new Color(50, 200, 200);//128,192,128
 	private Tetris tetris;
 
 	public SidePanel(Tetris tetris){
@@ -38,6 +38,10 @@ private static final int SMALL_INSET = 20;
 	@Override
 	public void paintComponent(Graphics g) {	
 		super.paintComponent(g);
+		
+		g.setColor(DRAW_COLOR);
+		g.setFont(LARGE_FONT);
+		
 		int offset;
 		
 		//Hien Thi De bat Dau, Do Kho,Diem Dat Duoc
