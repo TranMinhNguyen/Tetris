@@ -44,6 +44,14 @@ public class BoardPanel extends JPanel{
 		
 		g.setColor(Color.WHITE);
 		g.drawRect(0, 0, TILE_SIZE * COL_COUNT, TILE_SIZE * VISIBLE_ROW_COUNT);
+		 //ve duong ke cho bang
+		g.setColor(Color.DARK_GRAY);
+		for(int x = 0; x < COL_COUNT; x++) {
+			for(int y = 0; y < VISIBLE_ROW_COUNT; y++) {
+				g.drawLine(0, y * TILE_SIZE, COL_COUNT * TILE_SIZE, y * TILE_SIZE);
+				g.drawLine(x * TILE_SIZE, 0, x * TILE_SIZE, VISIBLE_ROW_COUNT * TILE_SIZE);
+			}
+		}
 	}
 	
 	
