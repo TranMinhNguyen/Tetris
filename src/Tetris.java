@@ -11,8 +11,8 @@ import javax.swing.JMenuItem;
 
 public class Tetris extends JFrame{
 
-	int level;
-	int score;
+	private int level;
+	private int score;
 	private SidePanel sidepanel;
 	private BoardPanel boardpanel;
 	

@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 public class SidePanel extends JPanel{
 
-private static final int SMALL_INSET = 20;
+	private static final int SMALL_INSET = 20;
 	
 	private static final int LARGE_INSET = 40;
 	
@@ -17,6 +17,25 @@ private static final int SMALL_INSET = 20;
 	private static final int CONTROLS_INSET = 300;
 	
 	private static final int TEXT_STRIDE = 25;
+	
+	//toa do x cua o vuong 
+	private static final int SQUARE_CENTER_X = 130;	
+	
+	//toa do y cua o vuong
+	private static final int SQUARE_CENTER_Y = 65;	
+	
+	
+	//giam so pixels cho 1 vien gach di 1 nua
+	private static final int TILE_SIZE = BoardPanel.TILE_SIZE >> 1; 
+	
+	
+	//so hang cot de hien thi khoi tiep theo cua o trong
+	private static final int TILE_COUNT = 5;	
+	
+	
+	//kich thuoc cua o trong
+	private static final int SQUARE_SIZE = (TILE_SIZE * TILE_COUNT >> 1); 
+	
 	
 	//Phong Chu Nho
 	private static final Font SMALL_FONT = new Font("Tahoma", Font.BOLD, 11);
@@ -65,7 +84,7 @@ private static final int SMALL_INSET = 20;
 		//Hien Thi Phan Tiep Theo Cua O Xem Truoc 
 		g.setFont(LARGE_FONT);
 		g.drawString("Next Piece:", SMALL_INSET, 70);
-		
+		g.drawRect(SQUARE_CENTER_X - SQUARE_SIZE, SQUARE_CENTER_Y - SQUARE_SIZE, SQUARE_SIZE * 2, SQUARE_SIZE * 2);
 			}
 	
 }
