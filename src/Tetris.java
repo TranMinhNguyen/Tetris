@@ -18,6 +18,7 @@ public class Tetris extends JFrame{
 	private int score;
 	private int cotHienTai;
 	private int hangHienTai;
+	private boolean i=false;
 	
 	//huong quay hien tai
 	private int currentRotation;
@@ -54,9 +55,23 @@ public class Tetris extends JFrame{
 				case KeyEvent.VK_Q:
 					if (currentRotation==0) currentRotation=3;
 					else currentRotation--;
-					
 					boardpanel.repaint();
 				break;
+				//phim E dung de quay hinh sang phai	
+				case KeyEvent.VK_E:
+					if (currentRotation==3) currentRotation=0;
+					else currentRotation++;
+					boardpanel.repaint();
+				break;
+				//phim A dung de dich trai
+				case KeyEvent.VK_A:
+					if (cotHienTai != 0) cotHienTai --;
+				break;
+				//phim D dung de dich phai
+				case KeyEvent.VK_D:
+					if (cotHienTai != 7) cotHienTai ++;
+				break;
+				//phim S dung de tang speed cho khoi gach
 				
 				}	
 			}
@@ -108,15 +123,14 @@ public class Tetris extends JFrame{
 		this.cotHienTai=3;
 		this.currentRotation=0;
 		
-		while(true){
-			
-			
-			sec=350000000;
-			while (sec>0) sec--;
-			updateGame();
+			while(true){
+				sec=350000000;
+				while (sec>0) sec--;
+				updateGame();
 			
 		}
-	}
+		}
+		
 	
 	
 
