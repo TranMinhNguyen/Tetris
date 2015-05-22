@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
@@ -10,9 +11,16 @@ import javax.swing.JMenuItem;
 
 
 public class Tetris extends JFrame{
-
+	//time delay
+	private int sec;
+	
 	private int level;
 	private int score;
+	private int cotHienTai;
+	private int hangHienTai;
+	
+	//huong quay hien tai
+	private int currentRotation;
 	private SidePanel sidepanel;
 	private BoardPanel boardpanel;
 	
@@ -32,6 +40,29 @@ public class Tetris extends JFrame{
 	
 		add(sidepanel,BorderLayout.EAST);
 		add(boardpanel,BorderLayout.CENTER);
+		
+		addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+				
+				switch(e.getKeyCode()){
+				
+				//nut Q dung de quay hinh sang trai
+				case KeyEvent.VK_Q:
+					if (currentRotation==0) currentRotation=3;
+					else currentRotation--;
+					
+					boardpanel.repaint();
+				break;
+				
+				}	
+			}
+			
+			
+		});
 		
 		pack();
 		setVisible(true);
@@ -69,9 +100,38 @@ public class Tetris extends JFrame{
 			   }
 		   }
 	   }
-	public static void main(String[] args) {
-		new Tetris(); 
 	
+	public void startGame(){
+		this.level=1;
+		this.score=0;
+		this.hangHienTai=2;
+		this.cotHienTai=3;
+		this.currentRotation=0;
+		
+		while(true){
+			
+			
+			sec=350000000;
+			while (sec>0) sec--;
+			updateGame();
+			
+		}
+	}
+	
+	
+
+	public int getCurrentRotation() {
+		return currentRotation;
+	}
+
+	public void updateGame(){
+		this.hangHienTai++;
+		boardpanel.repaint();
+	}
+	
+	public static void main(String[] args) {
+		Tetris tetris =new Tetris(); 
+		tetris.startGame();
 	}
 
 	public int getLevel() {
@@ -83,4 +143,12 @@ public class Tetris extends JFrame{
 		return score;
 	}
 
+	public int getCotHienTai() {
+		return cotHienTai;
+	}
+
+	public int getHangHienTai() {
+		return hangHienTai;
+	}
+	
 }

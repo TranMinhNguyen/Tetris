@@ -52,6 +52,10 @@ public class BoardPanel extends JPanel{
 	
 	private Tetris tetris;
 	
+	
+	private DangKhoiGach[][] tiles;
+	
+	
 	public BoardPanel(Tetris tetris){
 		this.tetris=tetris;
 		setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -64,12 +68,16 @@ public class BoardPanel extends JPanel{
 		super.paintComponent(g);
 		
 		
+		int col=tetris.getCotHienTai();
+		int row=tetris.getHangHienTai();
+		int rotation=tetris.getCurrentRotation();
+		
 		DangKhoiGach type=DangKhoiGach.values()[2];
 		for (int i=0; i<type.getSizeGhost();i++)
 			for (int j=0;j<type.getSizeGhost();j++)
 			{
-				if (type.checkTetris(j, i, 0))
-				drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(), j*TILE_SIZE+3*TILE_SIZE ,i*TILE_SIZE+3*TILE_SIZE , g);
+				if (type.checkTetris(j, i, rotation))
+				drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(), j*TILE_SIZE+col*TILE_SIZE ,i*TILE_SIZE+row*TILE_SIZE , g);
 			}
 		
 		
@@ -125,6 +133,7 @@ public class BoardPanel extends JPanel{
 		}
 		
 	}
+
 	
 	
 }
