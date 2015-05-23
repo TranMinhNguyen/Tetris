@@ -18,6 +18,9 @@ public class SidePanel extends JPanel{
 	
 	private static final int TEXT_STRIDE = 25;
 	
+	public static final int SHADE_WIDTH = 4;
+	//chieu rong cua vien khoi gach
+	
 	//toa do x cua o vuong 
 	private static final int SQUARE_CENTER_X = 130;	
 	
@@ -58,6 +61,18 @@ public class SidePanel extends JPanel{
 	public void paintComponent(Graphics g) {	
 		super.paintComponent(g);
 		
+		int col=tetris.getCotTiepTheo();
+		int row=tetris.getHangTiepTheo();
+		int rotation=tetris.getNextRotation();
+		DangKhoiGach type=tetris.getKhoiTiepTheo();
+		for (int i=0; i<type.getSizeGhost();i++)
+			for (int j=0;j<type.getSizeGhost();j++)
+			{
+				if (type.checkTetris(j, i, rotation))
+				drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(), j*TILE_SIZE+col*TILE_SIZE ,i*TILE_SIZE+row*TILE_SIZE , g);
+			}
+		
+		
 		g.setColor(DRAW_COLOR);
 		g.setFont(LARGE_FONT);
 		
@@ -86,5 +101,30 @@ public class SidePanel extends JPanel{
 		g.drawString("Next Piece:", SMALL_INSET, 70);
 		g.drawRect(SQUARE_CENTER_X - SQUARE_SIZE, SQUARE_CENTER_Y - SQUARE_SIZE, SQUARE_SIZE * 2, SQUARE_SIZE * 2);
 			}
+	
+	public void drawTile(DangKhoiGach type,int x,int y,Graphics g){
+		drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(),x,y,g);
+	}
+
+	public void drawTile(Color mauCoBan, Color mauSang, Color mauToi, int x,
+			int y, Graphics g) {
+		// TODO Auto-generated method stub
+		
+		//ve khoi gach co mau co ban
+		g.setColor(mauCoBan);
+		g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+		
+		//tao vien toi phia duoi va ben phai khoi gach
+		g.setColor(mauToi);
+		g.fillRect(x, y + TILE_SIZE - SHADE_WIDTH, TILE_SIZE, SHADE_WIDTH);
+		g.fillRect(x + TILE_SIZE - SHADE_WIDTH, y, SHADE_WIDTH, TILE_SIZE);
+		
+		//tao vien sang phia duoi va ben trai khoi gach
+		g.setColor(mauSang);
+		for(int i = 0; i < SHADE_WIDTH; i++) {
+			g.drawLine(x, y + i, x + TILE_SIZE - i - 1, y + i);
+			g.drawLine(x + i, y, x + i, y + TILE_SIZE - i - 1);
+		}
+	}
 	
 }

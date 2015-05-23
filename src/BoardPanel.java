@@ -157,11 +157,11 @@ public class BoardPanel extends JPanel{
 		
 	}
 	
-	private void drawTile(DangKhoiGach type,int x,int y,Graphics g){
+	public void drawTile(DangKhoiGach type,int x,int y,Graphics g){
 		drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(),x,y,g);
 	}
 
-	private void drawTile(Color mauCoBan, Color mauSang, Color mauToi, int x,
+	public void drawTile(Color mauCoBan, Color mauSang, Color mauToi, int x,
 			int y, Graphics g) {
 		// TODO Auto-generated method stub
 		

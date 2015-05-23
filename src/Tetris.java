@@ -22,6 +22,8 @@ public class Tetris extends JFrame{
 			private boolean isGameOver;
 			
 			
+			private int cotTiepTheo;
+			private int hangTiepTheo;
 			private int cotHienTai;
 			private int hangHienTai;
 			private boolean isPaused;
@@ -35,6 +37,7 @@ public class Tetris extends JFrame{
 			
 			//huong quay hien tai
 			private int currentRotation;
+			private int nextRotation;
 			private SidePanel sidepanel;
 			private BoardPanel boardpanel;
 			
@@ -171,6 +174,9 @@ public class Tetris extends JFrame{
 			public int getCurrentRotation() {
 				return currentRotation;
 			}
+			public int getNextRotation(){
+				return nextRotation;
+			}
 
 			public void updateGame(){
 				if(boardpanel.checkMove(KhoiHT, cotHienTai, hangHienTai+1, currentRotation))
@@ -184,6 +190,10 @@ public class Tetris extends JFrame{
 					this.currentRotation=0;
 				}
 				boardpanel.repaint();
+				this.KhoiTiepTheo=this.KhoiTiepTheo;
+				this.cotTiepTheo=9;
+				this.hangTiepTheo=4;
+				sidepanel.repaint();
 			}
 			
 			public static void main(String[] args) {
@@ -198,7 +208,6 @@ public class Tetris extends JFrame{
 			public DangKhoiGach getKhoiTiepTheo() {
 				return KhoiTiepTheo;
 			}
-
 			public int getLevel() {
 				
 				return level;
@@ -214,6 +223,12 @@ public class Tetris extends JFrame{
 
 			public int getHangHienTai() {
 				return hangHienTai;
+			}
+			public int getCotTiepTheo(){
+				return cotTiepTheo;
+			}
+			public int getHangTiepTheo(){
+				return hangTiepTheo;
 			}
 	
 }
