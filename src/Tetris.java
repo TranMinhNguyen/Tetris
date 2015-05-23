@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -16,9 +17,17 @@ public class Tetris extends JFrame{
 			
 			private int level;
 			private int score;
+			
 			private int cotHienTai;
 			private int hangHienTai;
-			private boolean isPaused=false;
+			private boolean isPaused;
+			
+			//khoi gach hien tai
+			private DangKhoiGach KhoiHT;
+			
+			private DangKhoiGach KhoiTiepTheo;
+			
+			private Random random=new Random();
 			
 			//huong quay hien tai
 			private int currentRotation;
@@ -57,28 +66,32 @@ public class Tetris extends JFrame{
 								if (currentRotation==0) currentRotation=3;
 								else currentRotation--;
 								boardpanel.repaint();
-							break;}
+								}
+								break;
 						//phim E dung de quay hinh sang phai	
 						case KeyEvent.VK_E:
 							if (!isPaused){
 								if (currentRotation==3) currentRotation=0;
 								else currentRotation++;
 								boardpanel.repaint();
-							break;}
+							}
+							break;
 						//phim A dung de dich trai
 						case KeyEvent.VK_A:
 							if (!isPaused){
 								if (cotHienTai != 0) cotHienTai --;
-							break;}
+								}
+							break;
 						//phim D dung de dich phai
 						case KeyEvent.VK_D:
 							if (!isPaused){
 								if (cotHienTai != 7) cotHienTai ++;
-							break;}
+							}
+							break;
 						//phim P de tam dung choi game
 						case KeyEvent.VK_P:
 							isPaused=!isPaused;
-							
+						break;	
 						
 						}	
 					}
@@ -129,13 +142,16 @@ public class Tetris extends JFrame{
 				this.hangHienTai=2;
 				this.cotHienTai=3;
 				this.currentRotation=0;
+				this.isPaused=false;
+				this.KhoiHT=DangKhoiGach.values()[random.nextInt(7)];
+				this.KhoiTiepTheo=DangKhoiGach.values()[random.nextInt(7)];
 				
 					while(true){
-						sec=350000000;
-						while (sec>0) sec--;
-						if(!isPaused)
-						updateGame();
-					
+						if(!isPaused){
+							sec=350000000;
+							while (sec>0) sec--;
+							updateGame();
+					}
 				}
 				}
 				
@@ -149,12 +165,28 @@ public class Tetris extends JFrame{
 			public void updateGame(){
 				if(hangHienTai<18)
 				this.hangHienTai++;
+				else {
+					boardpanel.themKhoiGach(this.KhoiHT, this.cotHienTai, this.hangHienTai, this.currentRotation);
+					this.KhoiHT=this.KhoiTiepTheo;
+					this.KhoiTiepTheo=DangKhoiGach.values()[random.nextInt(7)];
+					this.cotHienTai=this.KhoiHT.getCotVe();
+					this.hangHienTai=this.KhoiHT.getHangVe();
+					this.currentRotation=0;
+				}
 				boardpanel.repaint();
 			}
 			
 			public static void main(String[] args) {
 				Tetris tetris =new Tetris(); 
 				tetris.startGame();
+			}
+
+			public DangKhoiGach getKhoiHT() {
+				return KhoiHT;
+			}
+
+			public DangKhoiGach getKhoiTiepTheo() {
+				return KhoiTiepTheo;
 			}
 
 			public int getLevel() {

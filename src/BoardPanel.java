@@ -58,9 +58,31 @@ public class BoardPanel extends JPanel{
 	
 	public BoardPanel(Tetris tetris){
 		this.tetris=tetris;
+		this.tiles= new DangKhoiGach[COL_COUNT+10][ROW_COUNT+10];
+		
 		setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 		setBackground(Color.BLACK);
 	}
+	
+	
+	public void themKhoiGach(DangKhoiGach type, int x,int y,int rotation){
+		for(int col = 0; col < type.getSizeGhost(); col++) {
+			for(int row = 0; row < type.getSizeGhost(); row++) {
+				if(type.checkTetris(col, row, rotation)) {
+					setTile(col + x, row + y, type);
+				}
+			}
+		}
+	}
+
+	private void setTile(int i, int j, DangKhoiGach type) {
+		tiles[i][j] = type;
+	}
+	
+	private DangKhoiGach getTile(int x,int y){
+		return tiles[x][y];
+	}
+
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -68,11 +90,21 @@ public class BoardPanel extends JPanel{
 		super.paintComponent(g);
 		
 		
+		for(int x = 0; x < COL_COUNT; x++) {
+			for(int y = 0; y < ROW_COUNT-HIDDEN_ROW_COUNT; y++) {
+				DangKhoiGach tile = getTile(x, y);
+				if(tile != null) {
+					drawTile(tile, x * TILE_SIZE, y * TILE_SIZE, g);
+				}
+			}
+		}
+		
+		
 		int col=tetris.getCotHienTai();
 		int row=tetris.getHangHienTai();
 		int rotation=tetris.getCurrentRotation();
 		
-		DangKhoiGach type=DangKhoiGach.values()[2];
+		DangKhoiGach type=tetris.getKhoiHT();
 		for (int i=0; i<type.getSizeGhost();i++)
 			for (int j=0;j<type.getSizeGhost();j++)
 			{
@@ -110,6 +142,10 @@ public class BoardPanel extends JPanel{
 		
 		
 		
+	}
+	
+	private void drawTile(DangKhoiGach type,int x,int y,Graphics g){
+		drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(),x,y,g);
 	}
 
 	private void drawTile(Color mauCoBan, Color mauSang, Color mauToi, int x,

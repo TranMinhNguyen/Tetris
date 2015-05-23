@@ -192,6 +192,11 @@ public enum DangKhoiGach {
 	private Color mauSang;
 	private Color mauToi;
 	
+	//hang de ve~ khoi gach
+	private int hangVe;
+	
+	private int cotVe;
+	
 	private DangKhoiGach(Color color, int sizeGhost, int cot, int hang, boolean[][] mangGach){
 		this.mauCoBan = color;
 		this.mauSang=color.brighter();
@@ -201,8 +206,18 @@ public enum DangKhoiGach {
 		this.hang = hang;
 		this.mangGach = mangGach;
 			
+		this.hangVe=0;
+		this.cotVe=3;
 	}
 	
+	public int getHangVe() {
+		return hangVe;
+	}
+
+	public int getCotVe() {
+		return cotVe;
+	}
+
 	public boolean checkTetris(int cot,int hang,int huongXoay){
 		return mangGach[huongXoay][hang*sizeGhost+cot];
 	}
@@ -230,6 +245,8 @@ public enum DangKhoiGach {
 	public Color getMauToi() {
 		return mauToi;
 	}
+
+	
 	
 	
 	
