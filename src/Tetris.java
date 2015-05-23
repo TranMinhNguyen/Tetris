@@ -18,6 +18,10 @@ public class Tetris extends JFrame{
 			private int level;
 			private int score;
 			
+			private boolean isNewGame;
+			private boolean isGameOver;
+			
+			
 			private int cotHienTai;
 			private int hangHienTai;
 			private boolean isPaused;
@@ -63,29 +67,37 @@ public class Tetris extends JFrame{
 						//nut Q dung de quay hinh sang trai
 						case KeyEvent.VK_Q:
 							if (!isPaused){
-								if (currentRotation==0) currentRotation=3;
-								else currentRotation--;
+								int rotation=currentRotation;
+								if (rotation==0) rotation=3;
+								else rotation--;
+								if (boardpanel.checkMove(KhoiHT, cotHienTai, hangHienTai, rotation))
+									currentRotation=rotation;
 								boardpanel.repaint();
 								}
 								break;
 						//phim E dung de quay hinh sang phai	
 						case KeyEvent.VK_E:
 							if (!isPaused){
-								if (currentRotation==3) currentRotation=0;
-								else currentRotation++;
+								int rotation=currentRotation;
+								if (rotation==3) rotation=0;
+								else rotation++;
+								if (boardpanel.checkMove(KhoiHT, cotHienTai, hangHienTai, rotation))
+									currentRotation=rotation;
 								boardpanel.repaint();
 							}
 							break;
 						//phim A dung de dich trai
 						case KeyEvent.VK_A:
 							if (!isPaused){
-								if (cotHienTai != 0) cotHienTai --;
+								if (boardpanel.checkMove(KhoiHT, cotHienTai-1, hangHienTai, currentRotation)) 
+									cotHienTai --;
 								}
 							break;
 						//phim D dung de dich phai
 						case KeyEvent.VK_D:
 							if (!isPaused){
-								if (cotHienTai != 7) cotHienTai ++;
+								if (boardpanel.checkMove(KhoiHT, cotHienTai+1, hangHienTai, currentRotation)) 
+									cotHienTai ++;
 							}
 							break;
 						//phim P de tam dung choi game
@@ -143,6 +155,7 @@ public class Tetris extends JFrame{
 				this.cotHienTai=3;
 				this.currentRotation=0;
 				this.isPaused=false;
+				
 				this.KhoiHT=DangKhoiGach.values()[random.nextInt(7)];
 				this.KhoiTiepTheo=DangKhoiGach.values()[random.nextInt(7)];
 				
@@ -155,9 +168,6 @@ public class Tetris extends JFrame{
 				}
 				}
 				
-			
-			
-
 			public int getCurrentRotation() {
 				return currentRotation;
 			}
