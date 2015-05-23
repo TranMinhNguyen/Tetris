@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 
+
 public class SidePanel extends JPanel{
 
 	private static final int SMALL_INSET = 20;
@@ -18,8 +19,8 @@ public class SidePanel extends JPanel{
 	
 	private static final int TEXT_STRIDE = 25;
 	
-	public static final int SHADE_WIDTH = 4;
-	//chieu rong cua vien khoi gach
+	private static final int SHADE_WIDTH = BoardPanel.SHADE_WIDTH >> 1;
+	//chieu rong cua vien khoi gach giam di 1 nua
 	
 	//toa do x cua o vuong 
 	private static final int SQUARE_CENTER_X = 130;	
@@ -29,7 +30,7 @@ public class SidePanel extends JPanel{
 	
 	
 	//giam so pixels cho 1 vien gach di 1 nua
-	private static final int TILE_SIZE = BoardPanel.TILE_SIZE >> 1; 
+	private static final int TILE_SIZE = BoardPanel.TILE_SIZE >>1; 
 	
 	
 	//so hang cot de hien thi khoi tiep theo cua o trong
@@ -61,6 +62,8 @@ public class SidePanel extends JPanel{
 	public void paintComponent(Graphics g) {	
 		super.paintComponent(g);
 		
+		//hien thi khoi gach ke tiep
+		if(tetris.getIsNewGame()==true){
 		int col=tetris.getCotTiepTheo();
 		int row=tetris.getHangTiepTheo();
 		int rotation=tetris.getNextRotation();
@@ -69,10 +72,9 @@ public class SidePanel extends JPanel{
 			for (int j=0;j<type.getSizeGhost();j++)
 			{
 				if (type.checkTetris(j, i, rotation))
-				drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(), j*TILE_SIZE+col*TILE_SIZE ,i*TILE_SIZE+row*TILE_SIZE , g);
+				drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(), j*TILE_SIZE+col*TILE_SIZE,i*TILE_SIZE+row*TILE_SIZE , g);
 			}
-		
-		
+		}
 		g.setColor(DRAW_COLOR);
 		g.setFont(LARGE_FONT);
 		
@@ -100,8 +102,8 @@ public class SidePanel extends JPanel{
 		g.setFont(LARGE_FONT);
 		g.drawString("Next Piece:", SMALL_INSET, 70);
 		g.drawRect(SQUARE_CENTER_X - SQUARE_SIZE, SQUARE_CENTER_Y - SQUARE_SIZE, SQUARE_SIZE * 2, SQUARE_SIZE * 2);
-			}
-	
+			
+	}
 	public void drawTile(DangKhoiGach type,int x,int y,Graphics g){
 		drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(),x,y,g);
 	}
@@ -118,12 +120,12 @@ public class SidePanel extends JPanel{
 		g.setColor(mauToi);
 		g.fillRect(x, y + TILE_SIZE - SHADE_WIDTH, TILE_SIZE, SHADE_WIDTH);
 		g.fillRect(x + TILE_SIZE - SHADE_WIDTH, y, SHADE_WIDTH, TILE_SIZE);
-		
+
 		//tao vien sang phia duoi va ben trai khoi gach
 		g.setColor(mauSang);
 		for(int i = 0; i < SHADE_WIDTH; i++) {
-			g.drawLine(x, y + i, x + TILE_SIZE - i - 1, y + i);
-			g.drawLine(x + i, y, x + i, y + TILE_SIZE - i - 1);
+			g.drawLine(x, y + i, x +TILE_SIZE - i - 1, y + i);
+			g.drawLine(x + i, y, x + i, y +TILE_SIZE - i - 1);
 		}
 	}
 	

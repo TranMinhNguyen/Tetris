@@ -102,7 +102,29 @@ public class BoardPanel extends JPanel{
 		// TODO Auto-generated method stub
 		super.paintComponent(g);
 		
+		g.setColor(Color.WHITE);
+		g.drawRect(0, 0, TILE_SIZE * COL_COUNT, TILE_SIZE * VISIBLE_ROW_COUNT);
 		
+		//hien thi man hinh truoc khi choi game
+		
+			if(tetris.getIsNewGame()==false){
+			//"TETRIS"
+			g.setFont(LARGE_FONT);
+			g.drawString("TETRIS", CENTER_X - g.getFontMetrics().stringWidth("TETRIS") / 2, 150);
+			//"Press Enter to Play"
+			g.setFont(SMALL_FONT);
+			g.drawString("Press Enter to Play", CENTER_X - g.getFontMetrics().stringWidth("Press Enter to Play") / 2,300 );
+			}
+			else if (tetris.getIsGameOver()==true){
+				//"GAME OVER"
+				g.setFont(LARGE_FONT);
+				g.drawString("GAME OVER", CENTER_X - g.getFontMetrics().stringWidth("GAME OVER") / 2, 150);	
+				//"Press Enter to Play"
+				g.setFont(SMALL_FONT);
+				g.drawString("Press Enter to Play", CENTER_X - g.getFontMetrics().stringWidth("Press Enter to Play") / 2,300 );
+			}
+		//hien thi game
+		else{
 		for(int x = 0; x < COL_COUNT; x++) {
 			for(int y = 0; y < ROW_COUNT-HIDDEN_ROW_COUNT; y++) {
 				DangKhoiGach tile = getTile(x, y);
@@ -125,25 +147,6 @@ public class BoardPanel extends JPanel{
 				drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(), j*TILE_SIZE+col*TILE_SIZE ,i*TILE_SIZE+row*TILE_SIZE , g);
 			}
 		
-		
-		g.setColor(Color.WHITE);
-		g.drawRect(0, 0, TILE_SIZE * COL_COUNT, TILE_SIZE * VISIBLE_ROW_COUNT);
-		
-		
-		g.setColor(Color.WHITE);
-		g.drawRect(0, 0, TILE_SIZE * COL_COUNT, TILE_SIZE * VISIBLE_ROW_COUNT);
-		
-		
-		//"Press Enter to Play"
-		//g.setFont(SMALL_FONT);
-		//g.drawString("Press Enter to Play", CENTER_X - g.getFontMetrics().stringWidth("Press Enter to Play") / 2,300 );
-		
-		
-		//"TETRIS"
-		//g.setFont(LARGE_FONT);
-		//g.drawString("TETRIS", CENTER_X - g.getFontMetrics().stringWidth("TETRIS") / 2, 150);
-		 
-		
 		//ve duong ke cho bang
 		g.setColor(Color.DARK_GRAY);
 		for(int x = 0; x < COL_COUNT; x++) {
@@ -152,7 +155,7 @@ public class BoardPanel extends JPanel{
 				g.drawLine(x * TILE_SIZE, 0, x * TILE_SIZE, VISIBLE_ROW_COUNT * TILE_SIZE);
 			}
 		}
-		
+		}
 		
 		
 	}

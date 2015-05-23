@@ -107,7 +107,8 @@ public class Tetris extends JFrame{
 						case KeyEvent.VK_P:
 							isPaused=!isPaused;
 						break;	
-						
+						case KeyEvent.VK_ENTER:
+							isNewGame=true;
 						}	
 					}
 					
@@ -152,23 +153,26 @@ public class Tetris extends JFrame{
 			   }
 			
 			public void startGame(){
+				isNewGame=false;
+				isGameOver=false;
 				this.level=1;
 				this.score=0;
-				this.hangHienTai=2;
+				this.hangHienTai=0;
 				this.cotHienTai=3;
 				this.currentRotation=0;
 				this.isPaused=false;
 				
 				this.KhoiHT=DangKhoiGach.values()[random.nextInt(7)];
 				this.KhoiTiepTheo=DangKhoiGach.values()[random.nextInt(7)];
-				
 					while(true){
 						if(!isPaused){
 							sec=200000000;
 							while (sec>0) sec--;
+							if(isNewGame==true)
 							updateGame();
 					}
 				}
+				
 				}
 				
 			public int getCurrentRotation() {
@@ -190,7 +194,6 @@ public class Tetris extends JFrame{
 					this.currentRotation=0;
 				}
 				boardpanel.repaint();
-				this.KhoiTiepTheo=this.KhoiTiepTheo;
 				this.cotTiepTheo=9;
 				this.hangTiepTheo=4;
 				sidepanel.repaint();
@@ -229,6 +232,12 @@ public class Tetris extends JFrame{
 			}
 			public int getHangTiepTheo(){
 				return hangTiepTheo;
+			}
+			public boolean getIsNewGame(){
+				return isNewGame;
+			}
+			public boolean getIsGameOver(){
+				return isGameOver;
 			}
 	
 }
