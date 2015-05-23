@@ -148,7 +148,7 @@ public class Tetris extends JFrame{
 				
 					while(true){
 						if(!isPaused){
-							sec=350000000;
+							sec=200000000;
 							while (sec>0) sec--;
 							updateGame();
 					}
@@ -163,7 +163,7 @@ public class Tetris extends JFrame{
 			}
 
 			public void updateGame(){
-				if(hangHienTai<18)
+				if(boardpanel.checkMove(KhoiHT, cotHienTai, hangHienTai+1, currentRotation))
 				this.hangHienTai++;
 				else {
 					boardpanel.themKhoiGach(this.KhoiHT, this.cotHienTai, this.hangHienTai, this.currentRotation);

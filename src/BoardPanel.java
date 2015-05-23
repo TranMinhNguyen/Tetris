@@ -82,6 +82,19 @@ public class BoardPanel extends JPanel{
 	private DangKhoiGach getTile(int x,int y){
 		return tiles[x][y];
 	}
+	
+	public boolean checkMove(DangKhoiGach type,int x,int y,int rotation){
+		if (x+type.getIndexLeft(rotation)<0||x+type.getIndexRight(rotation)>COL_COUNT-1) 
+			return false;
+		if (y+type.getIndexEnd(rotation)>=VISIBLE_ROW_COUNT) return false;
+		
+		for (int col=0;col<type.getSizeGhost();col++)
+			for (int row=0;row<type.getSizeGhost();row++)
+				if (type.checkTetris(col, row, rotation))
+					if (getTile(x+col, y+row)!=null) return false;
+			
+		return true;
+	}
 
 
 	@Override

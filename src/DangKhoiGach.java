@@ -245,8 +245,27 @@ public enum DangKhoiGach {
 	public Color getMauToi() {
 		return mauToi;
 	}
-
 	
+	public int getIndexRight(int rotation){
+		for (int i=sizeGhost-1;i>=0;i--)
+			for (int j=0;j<sizeGhost;j++)
+				if(checkTetris(i, j, rotation)) return i;
+		return -1;
+	}
+
+	public int getIndexLeft(int rotation){
+		for (int i=0;i<sizeGhost;i++)
+			for (int j=0;j<sizeGhost;j++)
+				if(checkTetris(i, j, rotation)) return i;
+		return -1;
+	}
+	
+	public int getIndexEnd(int rotation){
+		for (int i=sizeGhost-1;i>=0;i--)
+			for (int j=0;j<sizeGhost;j++)
+				if(checkTetris(j, i, rotation)) return i;
+		return -1;
+	}
 	
 	
 	
