@@ -27,6 +27,7 @@ public class Tetris extends JFrame{
 			private int cotHienTai;
 			private int hangHienTai;
 			private boolean isPaused;
+			private boolean isSpeed;
 			
 			//khoi gach hien tai
 			private DangKhoiGach KhoiHT;
@@ -107,9 +108,26 @@ public class Tetris extends JFrame{
 						case KeyEvent.VK_P:
 							isPaused=!isPaused;
 						break;	
+						//Enter de choi game moi
 						case KeyEvent.VK_ENTER:
 							isNewGame=true;
-						}	
+							break;	
+						//nhan giu phim S de tang toc cho khoi gach
+						case KeyEvent.VK_S:
+							isSpeed=true;
+							break;
+						}
+					}
+					//nha phim S de tro ve toc do binh thuong
+					@Override
+					public void keyReleased(KeyEvent e) {
+						
+						switch(e.getKeyCode()) {
+						
+						case KeyEvent.VK_S:
+							isSpeed=false;
+						}
+						
 					}
 					
 					
@@ -155,6 +173,7 @@ public class Tetris extends JFrame{
 			public void startGame(){
 				isNewGame=false;
 				isGameOver=false;
+				isSpeed=false;
 				this.level=1;
 				this.score=0;
 				this.hangHienTai=0;
@@ -165,8 +184,9 @@ public class Tetris extends JFrame{
 				this.KhoiHT=DangKhoiGach.values()[random.nextInt(7)];
 				this.KhoiTiepTheo=DangKhoiGach.values()[random.nextInt(7)];
 					while(true){
+					    if(isSpeed==false) sec=200000000;
+					    else sec=20000000;
 						if(!isPaused){
-							sec=200000000;
 							while (sec>0) sec--;
 							if(isNewGame==true)
 							updateGame();
@@ -238,6 +258,9 @@ public class Tetris extends JFrame{
 			}
 			public boolean getIsGameOver(){
 				return isGameOver;
+			}
+			public boolean getIsSpeed(){
+				return isSpeed;
 			}
 	
 }
