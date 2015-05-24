@@ -168,28 +168,36 @@ public class Tetris extends JFrame{
 			   }
 			   public void actionPerformed(ActionEvent e) {
 				   String s = e.getActionCommand();
-				   
+				   if(s=="NewGame"){
+					   boardpanel.clear();resetGame();
+				   }
 				   if(s == "Exit")
 				   {
 					   ter.dispose();
 				   }
 			   }
 		   }
-		
-		
-		
-		public void startGame(){
-			isNewGame=true;
+		public void resetGame(){
+			isNewGame=false;
 			isGameOver=false;
 			this.level=1;
 			this.score=0;
-			this.hangHienTai=0;
-			this.cotHienTai=3;
 			this.currentRotation=0;
 			this.isPaused=false;
 			
 			this.KhoiHT=DangKhoiGach.values()[random.nextInt(7)];
 			this.KhoiTiepTheo=DangKhoiGach.values()[random.nextInt(7)];
+			
+			this.hangHienTai=this.KhoiHT.getHangVe();
+			this.cotHienTai=this.KhoiHT.getCotVe();
+			
+		}
+		
+		
+		
+		public void startGame(){
+			resetGame();
+			isNewGame=true;
 				while(true){
 					sec=secmax;
 					if(!isPaused && !isNewGame && !isGameOver){

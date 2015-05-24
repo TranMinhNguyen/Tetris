@@ -60,7 +60,7 @@ private static final int SMALL_INSET = 20;
 		super.paintComponent(g);
 		
 		//hien thi khoi gach ke tiep
-		if(!tetris.getIsNewGame()){
+		if(!tetris.getIsNewGame()||!tetris.getIsGameOver()){
 		int col=tetris.getCotTiepTheo();
 		int row=tetris.getHangTiepTheo();
 		int rotation=tetris.getNextRotation();
@@ -101,6 +101,8 @@ private static final int SMALL_INSET = 20;
 		g.drawRect(SQUARE_CENTER_X - SQUARE_SIZE, SQUARE_CENTER_Y - SQUARE_SIZE, SQUARE_SIZE * 2, SQUARE_SIZE * 2);
 			
 	}
+	
+
 	public void drawTile(DangKhoiGach type,int x,int y,Graphics g){
 		drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(),x,y,g);
 	}

@@ -65,6 +65,13 @@ public class BoardPanel extends JPanel{
 				setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 				setBackground(Color.BLACK);
 			}
+			public void clear(){
+				for(int i=0;i<ROW_COUNT;i++){
+				   for(int j=0;j<COL_COUNT;j++){
+					    tiles[j][i]=null;
+				}
+			}
+		}
 			
 			
 			public void themKhoiGach(DangKhoiGach type, int x,int y,int rotation){

@@ -206,7 +206,7 @@ public enum DangKhoiGach {
 		this.hang = hang;
 		this.mangGach = mangGach;
 			
-		this.hangVe=0;
+		this.hangVe=-2;
 		this.cotVe=3;
 	}
 	
@@ -265,6 +265,14 @@ public enum DangKhoiGach {
 			for (int j=0;j<sizeGhost;j++)
 				if(checkTetris(j, i, rotation)) return i;
 		return -1;
+	}
+	
+	public int getIndexTop(int rotation){
+		for(int i=0;i<sizeGhost;i++)
+			for(int j=0;j<sizeGhost;j++)
+				if (checkTetris(j,i,rotation)) return i;
+		return -1;
+		
 	}
 	
 	
