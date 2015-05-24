@@ -21,7 +21,6 @@ public class Tetris extends JFrame{
 			private boolean isNewGame;
 			private boolean isGameOver;
 			
-			
 			private int cotTiepTheo;
 			private int hangTiepTheo;
 			private int cotHienTai;
@@ -212,6 +211,12 @@ public class Tetris extends JFrame{
 					this.cotHienTai=this.KhoiHT.getCotVe();
 					this.hangHienTai=this.KhoiHT.getHangVe();
 					this.currentRotation=0;
+					
+					//Tinh Diem
+					int cleared = boardpanel.checkLines();
+					if(cleared > 0) {
+						score += 50 << cleared;
+					}	
 				}
 				boardpanel.repaint();
 				this.cotTiepTheo=9;
@@ -261,6 +266,9 @@ public class Tetris extends JFrame{
 			}
 			public boolean getIsSpeed(){
 				return isSpeed;
+			}
+			public boolean isPaused() {
+				return isPaused;
 			}
 	
 }

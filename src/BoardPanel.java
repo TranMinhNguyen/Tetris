@@ -79,6 +79,33 @@ public class BoardPanel extends JPanel{
 		tiles[i][j] = type;
 	}
 	
+	private boolean checkLine(int line) {
+		//kiem tra 1 hang
+		for(int col = 0; col < COL_COUNT; col++) {
+			if(tiles[col][line]==null) {
+				return false;
+			}
+		}
+		
+		//Kiem tra hang tiep theo
+		for(int row = line - 1; row >= 0; row--) {
+			for(int col = 0; col < COL_COUNT; col++) {
+				setTile(col, row + 1, getTile(col, row));
+			}
+		}
+		return true;
+	}
+	public int checkLines() {
+		int completedLines = 0;
+		
+		for(int row = 0; row < ROW_COUNT; row++) {
+			if(checkLine(row)) {
+				completedLines++;
+			}
+		}
+		return completedLines;
+	}
+	
 	private DangKhoiGach getTile(int x,int y){
 		return tiles[x][y];
 	}
