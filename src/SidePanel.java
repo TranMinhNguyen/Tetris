@@ -5,11 +5,8 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-
-
 public class SidePanel extends JPanel{
-
-	private static final int SMALL_INSET = 20;
+private static final int SMALL_INSET = 20;
 	
 	private static final int LARGE_INSET = 40;
 	
@@ -63,7 +60,7 @@ public class SidePanel extends JPanel{
 		super.paintComponent(g);
 		
 		//hien thi khoi gach ke tiep
-		if(tetris.getIsNewGame()==true){
+		if(!tetris.getIsNewGame()){
 		int col=tetris.getCotTiepTheo();
 		int row=tetris.getHangTiepTheo();
 		int rotation=tetris.getNextRotation();
