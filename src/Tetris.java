@@ -195,6 +195,7 @@ public class Tetris extends JFrame{
 			this.hangHienTai=this.KhoiHT.getHangVe();
 			this.cotHienTai=this.KhoiHT.getCotVe();
 			
+			speedGame=200000000;
 			secmax=speedGame;
 		}
 		
@@ -247,7 +248,7 @@ public class Tetris extends JFrame{
 					score += 50 << cleared;
 					
 					level=1+score/1000;
-					speedGame-=50000000*(score/1000);
+					speedGame=200000000-30000000*(score/1000);
 				}	
 				}
 			}
