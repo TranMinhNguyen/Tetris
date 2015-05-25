@@ -60,7 +60,7 @@ private static final int SMALL_INSET = 20;
 		super.paintComponent(g);
 		
 		//hien thi khoi gach ke tiep
-		if(!tetris.getIsNewGame()||!tetris.getIsGameOver()){
+		if((!tetris.getIsNewGame())&&(!tetris.getIsGameOver())){
 		int col=tetris.getCotTiepTheo();
 		int row=tetris.getHangTiepTheo();
 		int rotation=tetris.getNextRotation();
@@ -79,7 +79,7 @@ private static final int SMALL_INSET = 20;
 		
 		//Hien Thi De bat Dau, Do Kho,Diem Dat Duoc
 		g.setFont(LARGE_FONT);
-		g.drawString("Stats", SMALL_INSET, offset = STATS_INSET);
+		g.drawString("Starts", SMALL_INSET, offset = STATS_INSET);
 		g.setFont(SMALL_FONT);
 		g.drawString("Level: " + tetris.getLevel(), LARGE_INSET, offset += TEXT_STRIDE);
 		g.drawString("Score: " + tetris.getScore(), LARGE_INSET, offset += TEXT_STRIDE);

@@ -126,7 +126,7 @@ public class BoardPanel extends JPanel{
 				
 				for (int col=0;col<type.getSizeGhost();col++)
 					for (int row=0;row<type.getSizeGhost();row++)
-						if (type.checkTetris(col, row, rotation))
+						if (type.checkTetris(col, row, rotation) &&(y+row>=0))
 							if (getTile(x+col, y+row)!=null) return false;
 					
 				return true;
@@ -183,13 +183,15 @@ public class BoardPanel extends JPanel{
 				int rotation=tetris.getCurrentRotation();
 				
 				DangKhoiGach type=tetris.getKhoiHT();
+				
+				if (row>=-1){
 				for (int i=0; i<type.getSizeGhost();i++)
 					for (int j=0;j<type.getSizeGhost();j++)
 					{
 						if (type.checkTetris(j, i, rotation))
 						drawTile(type.getMauCoBan(),type.getMauSang(),type.getMauToi(), j*TILE_SIZE+col*TILE_SIZE ,i*TILE_SIZE+row*TILE_SIZE , g);
 					}
-				
+				}
 				//ve duong ke cho bang
 				g.setColor(Color.DARK_GRAY);
 				for(int x = 0; x < COL_COUNT; x++) {

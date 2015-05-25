@@ -113,7 +113,9 @@ public class Tetris extends JFrame{
 					break;	
 					//Enter de choi game moi
 					case KeyEvent.VK_ENTER:
-						isNewGame=false;
+						if (!isNewGame|| !isGameOver)						
+						boardpanel.clear();
+						resetGame();
 						break;	
 					//nhan giu phim S de tang toc cho khoi gach
 					case KeyEvent.VK_S:
@@ -121,6 +123,7 @@ public class Tetris extends JFrame{
 						break;
 					}
 				}
+				
 				//nha phim S de tro ve toc do binh thuong
 				@Override
 				public void keyReleased(KeyEvent e) {
@@ -147,13 +150,13 @@ public class Tetris extends JFrame{
 			
 			this.setJMenuBar(menubar);
 			menu=new JMenu("Game");
-			menu.setMnemonic(KeyEvent.VK_G);
+		
 			
 			menuitem = new JMenuItem("New Game");
+			menuitem.addActionListener(new MenuHandler(this));
 			menu.add(menuitem);
 			
 			menuitem= new JMenuItem("Exit");
-			menuitem.setMnemonic(KeyEvent.VK_E);
 			menuitem.addActionListener(new MenuHandler(this));
 			menu.add(menuitem);
 			menubar.add(menu);
@@ -168,7 +171,7 @@ public class Tetris extends JFrame{
 			   }
 			   public void actionPerformed(ActionEvent e) {
 				   String s = e.getActionCommand();
-				   if(s=="NewGame"){
+				   if(s=="New Game"){
 					   boardpanel.clear();resetGame();
 				   }
 				   if(s == "Exit")
@@ -177,9 +180,10 @@ public class Tetris extends JFrame{
 				   }
 			   }
 		   }
+		
 		public void resetGame(){
-			isNewGame=false;
-			isGameOver=false;
+			this.isNewGame=false;
+			this.isGameOver=false;
 			this.level=1;
 			this.score=0;
 			this.currentRotation=0;
@@ -197,10 +201,11 @@ public class Tetris extends JFrame{
 		
 		public void startGame(){
 			resetGame();
-			isNewGame=true;
+			this.isNewGame=true;
 				while(true){
+				if(isNewGame) System.out.println("Press ENTER to play");
 					sec=secmax;
-					if(!isPaused && !isNewGame && !isGameOver){
+					if((!isPaused) && (!isNewGame) && (!isGameOver)){
 						while (sec>0) sec--;
 						updateGame();
 				}
@@ -215,10 +220,19 @@ public class Tetris extends JFrame{
 			return nextRotation;
 		}
 
+		public void setGameOver(boolean isGameOver) {
+			this.isGameOver = isGameOver;
+		}
+
 		public void updateGame(){
 			if(boardpanel.checkMove(KhoiHT, cotHienTai, hangHienTai+1, currentRotation))
 			this.hangHienTai++;
 			else {
+				if (hangHienTai+KhoiHT.getIndexTop(currentRotation)<0) {
+					isGameOver=true;
+					boardpanel.clear();
+				}
+				else {
 				boardpanel.themKhoiGach(this.KhoiHT, this.cotHienTai, this.hangHienTai, this.currentRotation);
 				this.KhoiHT=this.KhoiTiepTheo;
 				this.KhoiTiepTheo=DangKhoiGach.values()[random.nextInt(7)];
@@ -234,6 +248,7 @@ public class Tetris extends JFrame{
 					level=1+score/1000;
 					speedGame-=50000000*(score/1000);
 				}	
+				}
 			}
 			boardpanel.repaint();
 			this.cotTiepTheo=9;
