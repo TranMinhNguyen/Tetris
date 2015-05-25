@@ -195,6 +195,7 @@ public class Tetris extends JFrame{
 			this.hangHienTai=this.KhoiHT.getHangVe();
 			this.cotHienTai=this.KhoiHT.getCotVe();
 			
+			secmax=speedGame;
 		}
 		
 		
