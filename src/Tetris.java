@@ -113,9 +113,9 @@ public class Tetris extends JFrame{
 					break;	
 					//Enter de choi game moi
 					case KeyEvent.VK_ENTER:
-						if (!isNewGame|| !isGameOver)						
+						if (isNewGame|| isGameOver)	{					
 						boardpanel.clear();
-						resetGame();
+						resetGame();}
 						break;	
 					//nhan giu phim S de tang toc cho khoi gach
 					case KeyEvent.VK_S:
